@@ -1,0 +1,3 @@
+services:
+    - Spedito\Model\Validator\ShipmentValidator\ShipmentValidator
+    - Spedito\Model\Validator\TransportValidator\TransportValidator

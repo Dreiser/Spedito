@@ -1,0 +1,3 @@
+services:
+    - Spedito\Components\ShipmentForm\ShipmentFormFactory
+    - Spedito\Components\TransportForm\ITransportFormFactory

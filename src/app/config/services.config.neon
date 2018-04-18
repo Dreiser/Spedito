@@ -1,0 +1,2 @@
+services:
+    - Spedito\Model\Service\ShipmentService\ShipmentService

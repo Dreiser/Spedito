@@ -1,0 +1,10 @@
+services:
+    CustomerRepository:
+        class: Spedito\Model\Repository\CustomerRepository\CustomerRepository
+        factory: @Kdyby\Doctrine\EntityManager::getRepository(Spedito\Model\Entity\Customer)
+    ShipmentRepository:
+        class: Spedito\Model\Repository\ShipmentRepository\ShipmentRepository
+        factory: @Kdyby\Doctrine\EntityManager::getRepository(Spedito\Model\Entity\Shipment)
+    TransportRepository:
+        class: Spedito\Model\Repository\TransportRepository\TransportRepository
+        factory: @Kdyby\Doctrine\EntityManager::getRepository(Spedito\Model\Entity\Transport)

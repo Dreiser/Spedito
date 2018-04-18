@@ -1,0 +1,4 @@
+services:
+    - Spedito\Model\Facade\CustomerFacade\CustomerFacade
+    - Spedito\Model\Facade\ShipmentFacade\ShipmentFacade
+    - Spedito\Model\Facade\TransportFacade\TransportFacade

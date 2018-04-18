@@ -1,0 +1,48 @@
+#PHP
+phpfpm:
+  restart: always
+  build: .docker/php
+  volumes:
+    - './.docker/php/conf/php-fpm.conf:/usr/local/etc/php-fpm.conf'
+    - './.docker/php/conf/php.ini:/usr/local/etc/php/php.ini'
+    - './src:/var/www/html'
+    - './var/log/php-fpm:/var/log/php-fpm'
+    - './var/mail:/var/spool/mail'
+  links:
+    - 'db:db'
+  environment:
+    SPEDITO_DEV_HOSTS: 172.17.0.1
+    XDEBUG_CONFIG: remote_host=172.17.0.1
+  expose:
+    - 9000
+  
+# NGINX
+nginx:
+  restart: always
+  image: nginx:latest
+  ports:
+    - "8090:8080"
+  links:
+    - phpfpm:phpfpm
+  volumes:
+    - './.docker/nginx/conf/vhost.conf:/etc/nginx/conf.d/default.conf'
+    - './var/log/nginx:/var/log/nginx'
+  volumes_from:
+    - phpfpm
+
+#MySQL
+db:
+  restart: always
+  image: mysql:5.7
+  ports:
+    - 3309:3306
+  expose:
+    - 3306
+  environment:
+    MYSQL_ROOT_PASSWORD: localhost
+    MYSQL_USER: spedito
+    MYSQL_PASSWORD: localhost
+    MYSQL_DATABASE: spedito
+  volumes:
+    - ./var/mysql/data:/var/lib/mysql
+    - ./var/log/mysql:/var/log/mysql
